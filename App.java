@@ -25,27 +25,46 @@ public class App {
 
         GuessResults guessResult = guesser.guess(currentGuess);
 
-        if (guessResult == GuessResults.NO_ATTEMPTS) {
+        switch (guessResult) {
+          case LOWER:
+            System.out.println("Lower!");
+            break;
+
+          case HIGHER:
+            System.out.println("Higher!");
+            break;
+
+          case EXACT:
+            final int attempsTaken = ATTEMPTS_COUNT - guesser.getAttemptsCount();
+
+            System.out.println(
+              String.format("Congratulations, you won! It took you %d attempts. The number was %d.",
+                attempsTaken, 
+                guesser.getCurrentNumber()
+              )
+            );
+            break;
+        }
+
+        int attemptsLeft = guesser.getAttemptsCount();
+
+        if (guesser.getAttemptsCount() == 0) {
           System.out.println(
             String.format(
               "You are out of attempts :( The number was %d.",
               guesser.getCurrentNumber()
             )
           );
-        } else if (guessResult == GuessResults.LOWER) {
-          System.out.println("Lower!");
-        } else if (guessResult == GuessResults.HIGHER) {
-          System.out.println("Higher!");
-        } else if (guessResult == GuessResults.EXACT) {
-          final int attempsTaken = ATTEMPTS_COUNT - guesser.getAttemptsCount();
-
+          break;
+        } else {
           System.out.println(
-            String.format("Congratulations, you won! It took you %d attempts. The number was %d.",
-              attempsTaken, 
-              guesser.getCurrentNumber()
+            String.format(
+              "You have %d attempt(s) left",
+              attemptsLeft
             )
           );
         }
+    
       } catch (IOException e) {
         System.out.println(e);
       }
@@ -54,3 +73,4 @@ public class App {
     System.out.println("Script exit..");
   }
 }
+

@@ -4,5 +4,4 @@ public enum GuessResults {
   LOWER,
   HIGHER,
   EXACT,
-  NO_ATTEMPTS
 }

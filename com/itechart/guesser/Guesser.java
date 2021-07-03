@@ -13,10 +13,10 @@ public class Guesser {
     if (state == GameState.IDLE) {
       return GuessResults.EXACT;
     }
-
+    
     if (attemptsCount == 0) {
       state = GameState.IDLE;
-      return GuessResults.NO_ATTEMPTS;
+      return GuessResults.EXACT;
     }
 
     attemptsCount -= 1;
